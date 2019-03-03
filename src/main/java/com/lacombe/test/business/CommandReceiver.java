@@ -1,6 +1,5 @@
 package com.lacombe.test.business;
 
-import com.lacombe.test.model.Drinks;
 import com.lacombe.test.model.Order;
 
 /**
@@ -13,12 +12,19 @@ import com.lacombe.test.model.Order;
  */
 public class CommandReceiver {
 
-	public static void main(String[] args) {
-		int sugar = 2;
-		float insertedMoney = 2f;
-		Order order = new Order(Drinks.C, sugar, insertedMoney);
-		CommandReceiver drinkMaker = new CommandReceiver();
-		drinkMaker.takeOrder(order);
+	private DrinkMaker drinkMaker = new DrinkMaker();
+
+	/**
+	 * method used to make a drink
+	 * 
+	 * @param order the customer order
+	 */
+	public void makeDrink(Order order) {
+		String command = takeOrder(order);
+		if (drinkMaker.makeDrink(command)) {
+			order.getDrink().counter++;
+		}
+
 	}
 
 	/**
@@ -29,13 +35,15 @@ public class CommandReceiver {
 	 */
 	public String takeOrder(Order order) {
 		float change = order.getInsertedMoney() - order.getDrink().getPrice();
+		String Command;
 		if (change >= 0) {
-			return makeDrinkCommandConstructor(order);
+			Command = makeDrinkCommandConstructor(order);
 		} else {
-			return "m:" + order.getDrink().getDrinkName() + " price is " + order.getDrink().getPrice()
+			Command = "m:" + order.getDrink().getDrinkName() + " price is " + order.getDrink().getPrice()
 					+ "€, please add " + -change + "€";
 
 		}
+		return Command;
 	}
 
 	/**

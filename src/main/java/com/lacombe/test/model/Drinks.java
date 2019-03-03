@@ -7,10 +7,13 @@ package com.lacombe.test.model;
  *
  */
 public enum Drinks {
-	C("COFFEE", 0.6f), H("Chocolate", 0.5f), T("Tea", 0.4f), O("Orange Juice", 0.6f);
+	C("COFFEE", 0.6f) {
+	},
+	H("Chocolate", 0.5f), T("Tea", 0.4f), O("Orange Juice", 0.6f);
 
 	private final String drinkName;
 	private final float price;
+	public int counter = 0;
 
 	Drinks(String name, float price) {
 		this.drinkName = name;
@@ -23,6 +26,10 @@ public enum Drinks {
 
 	public float getPrice() {
 		return price;
+	}
+
+	public int getCounter() {
+		return counter;
 	}
 
 }

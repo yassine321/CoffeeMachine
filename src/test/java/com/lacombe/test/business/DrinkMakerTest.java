@@ -69,4 +69,19 @@ public class DrinkMakerTest {
 		assertEquals("O::", commandReceiver.takeOrder(order));
 	}
 
+	/**
+	 *
+	 * Chocolate
+	 */
+	@Test
+	public void report() {
+		order = new Order(Drinks.O, 0, 1f);
+		commandReceiver.makeDrink(order);
+		commandReceiver.makeDrink(order);
+		order = new Order(Drinks.T, 0, 1f);
+		commandReceiver.makeDrink(order);
+		commandReceiver.makeDrink(order);
+		String report = new Repporting().generateReport();
+		assertEquals("Orange Juice: 2\nTea: 2\nCoffee: 0\nChocolate: 0", report);
+	}
 }
