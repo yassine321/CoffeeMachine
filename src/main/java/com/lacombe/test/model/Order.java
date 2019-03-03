@@ -21,15 +21,26 @@ public class Order {
 	 */
 	private float insertedMoney;
 
+	/**
+	 * Attribute to specify if the drink, will be extra hot or not, for cold drink
+	 * (like orange juice) this value is always false (see the setter)
+	 */
+	private boolean extraHot;
+
 	public Order(Drinks drink, int sugar) {
 		super();
 		this.drink = drink;
 		this.sugar = sugar;
 	}
 
-	public Order(Drinks drink, int sugar, float addedMoney) {
+	public Order(Drinks drink, int sugar, float insertedMoney) {
 		this(drink, sugar);
-		this.insertedMoney = addedMoney;
+		this.insertedMoney = insertedMoney;
+	}
+
+	public Order(Drinks drink, int sugar, float insertedMoney, boolean extraHot) {
+		this(drink, sugar, insertedMoney);
+		this.extraHot = extraHot;
 	}
 
 	public Order() {
@@ -52,12 +63,23 @@ public class Order {
 		this.sugar = sugar;
 	}
 
-	public float getAddedMoney() {
+	public float getInsertedMoney() {
 		return insertedMoney;
 	}
 
-	public void setAddedMoney(float addedMoney) {
+	public void setInsertedMoney(float addedMoney) {
 		this.insertedMoney = addedMoney;
+	}
+
+	public boolean isExtraHot() {
+		return extraHot;
+	}
+
+	public void setExtraHot(boolean extraHot) {
+		if (this.drink == Drinks.O) {
+			this.extraHot = false;
+		}
+		this.extraHot = extraHot;
 	}
 
 }

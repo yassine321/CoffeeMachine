@@ -28,7 +28,7 @@ public class CommandReceiver {
 	 * @return a command that follow the DrinkMaker protocol
 	 */
 	public String takeOrder(Order order) {
-		float change = order.getAddedMoney() - order.getDrink().getPrice();
+		float change = order.getInsertedMoney() - order.getDrink().getPrice();
 		if (change >= 0) {
 			return makeDrinkCommandConstructor(order);
 		} else {
@@ -46,7 +46,11 @@ public class CommandReceiver {
 	 * @return
 	 */
 	private String makeDrinkCommandConstructor(Order order) {
-		StringBuilder sb = new StringBuilder(order.getDrink() + ":");
+		StringBuilder sb = new StringBuilder(order.getDrink().toString());
+		if (order.isExtraHot()) {
+			sb.append("h");
+		}
+		sb.append(":");
 		if (order.getSugar() > 0) {
 			sb.append(order.getSugar() + ":0");
 		} else {
